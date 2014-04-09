@@ -54,3 +54,68 @@ class BrandStem(object):
             'page_size': page_size,
         })
         return response.json()
+
+    def get_category_product_list(self, category_id, page=1, page_size=DEFAULT_PAGE_SIZE):
+        path = '/api/v2/category/{}/products'.format(category_id)
+        response = self.get(path, {
+            'page': page,
+            'page_size': page_size,
+        })
+        return response.json()
+
+    def search_category(self, name, page=1, page_size=DEFAULT_PAGE_SIZE):
+        path = '/api/v2/search/category'
+        response = self.get(path, {
+            'page': page,
+            'page_size': page_size,
+            'name': name,
+        })
+        return response.json()
+
+    def search_product_by_name(self, name, page=1, page_size=DEFAULT_PAGE_SIZE):
+        path = '/api/v2/search/product'
+        response = self.get(path, {
+            'page': page,
+            'page_size': page_size,
+            'name': name,
+        })
+        return response.json()
+
+    def search_product_by_gtin(self, gtin, page=1, page_size=DEFAULT_PAGE_SIZE):
+        path = '/api/v2/search/product'
+        response = self.get(path, {
+            'page': page,
+            'page_size': page_size,
+            'gtin': gtin,
+        })
+        return response.json()
+
+    def get_campaign_list(self, page=1, page_size=DEFAULT_PAGE_SIZE):
+        path = '/api/v2/campaign'
+        response = self.get(path, {
+            'page': page,
+            'page_size': page_size,
+        })
+        return response.json()
+
+    def get_campaign(self, campaign_id, page=1, page_size=DEFAULT_PAGE_SIZE):
+        path = '/api/v2/campaign/{}'.format(campaign_id)
+        response = self.get(path, {
+            'page': page,
+            'page_size': page_size,
+        })
+        return response.json()
+
+    def get_campaign_product_list(self, campaign_id, page=1, page_size=DEFAULT_PAGE_SIZE):
+        path = '/api/v2/campaign/{}/products'.format(campaign_id)
+        response = self.get(path, {
+            'page': page,
+            'page_size': page_size,
+        })
+        return response.json()
+
+if __name__ == '__main__':
+    access_id = 'sCtaahKysOKrldRDqGRx'
+    access_secret = 'cl1mKIYHBp84hp6RuNZJyvmjPGnKwMo5EfbS1PoY'
+    connection = BrandStem(access_id,access_secret)
+    print connection.get_campaign_list()
