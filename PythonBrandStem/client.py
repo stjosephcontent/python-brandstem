@@ -1,9 +1,28 @@
-from email.utils import formatdate
+import time
 import hashlib
 import hmac
+import json
+import collections
 
 from requests.models import Request
 from requests.sessions import Session
+
+
+class BrandStemResponse(collections.Sequence):
+
+    def __init__(self, response):
+        self.response = response.json()
+        response = json.loads(response.content)
+        self.count = response.get('count')
+        self.page = response.get('page')
+        self.num_pages = response.get('num_pages')
+        self.object_list = response.get('object_list')
+
+    def __len__(self):
+        return len(self.object_list)
+
+    def __getitem__(self, index):
+        return self.object_list[index]
 
 
 class BrandStem(object):
@@ -16,12 +35,12 @@ class BrandStem(object):
         self.access_secret = access_secret
 
     @staticmethod
-    def get_rfc_date():
-        return formatdate(usegmt=True)
+    def get_unix_date():
+        return int(time.time())
 
-    def compute_signature(self, path, rfc_date):
-        key = rfc_date + self.access_secret
-        signature_computed = hmac.new(key=key, msg=path, digestmod=hashlib.sha256).hexdigest()
+    def compute_signature(self, path, unix_date):
+        key = str(unix_date) + self.access_secret
+        signature_computed = hmac.new(key=str(key), msg=path, digestmod=hashlib.sha256).hexdigest()
         return signature_computed
 
     def get(self, endpoint, page, page_size, params=None):
@@ -37,18 +56,18 @@ class BrandStem(object):
         request = Request('GET', url, params=params)
         request = request.prepare()
 
-        rfc_date = self.get_rfc_date()
-        signature = self.compute_signature(request.path_url, rfc_date)
+        unix_date = self.get_unix_date()
+        signature = self.compute_signature(request.path_url, unix_date)
 
         request.headers.update({
-            'X-Brandstem-Date': rfc_date,
+            'X-Brandstem-Date': unix_date,
             'X-Brandstem-Access-Id': self.access_id,
             'X-Brandstem-Signature': signature,
         })
 
         # TODO: DQ remember to add cert and timeout
         response = session.send(request)
-        return response
+        return BrandStemResponse(response)
 
     def get_category_list(self, category_id=None, page=1, page_size=DEFAULT_PAGE_SIZE):
         if category_id:
