@@ -11,7 +11,7 @@ from requests.sessions import Session
 class BrandStemResponse(collections.Sequence):
 
     def __init__(self, response):
-        self.response = response.json()
+        self.response = response.content
         response = json.loads(response.content)
         self.count = response.get('count')
         self.page = response.get('page')
@@ -27,7 +27,7 @@ class BrandStemResponse(collections.Sequence):
 
 class BrandStem(object):
 
-    HOST = 'localhost:8000'
+    HOST = ''
     DEFAULT_PAGE_SIZE = 100
 
     def __init__(self, access_id, access_secret):
@@ -76,6 +76,10 @@ class BrandStem(object):
             endpoint = '/category'
         return self.get(endpoint, page, page_size)
 
+    def get_category(self, category_id, page=1, page_size=DEFAULT_PAGE_SIZE):
+        endpoint = '/category/{}'.format(category_id)
+        return self.get(endpoint, page, page_size)
+
     def get_category_product_list(self, category_id, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/category/{}/products'.format(category_id)
         return self.get(endpoint, page, page_size)
@@ -83,6 +87,10 @@ class BrandStem(object):
     def search_category(self, name, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/search/category'
         return self.get(endpoint, page, page_size, {'name': name})
+
+    def get_product(self, product_id, page=1, page_size=DEFAULT_PAGE_SIZE):
+        endpoint = '/product/{}'.format(product_id)
+        return self.get(endpoint, page, page_size)
 
     def search_product_by_name(self, name, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/search/product'
