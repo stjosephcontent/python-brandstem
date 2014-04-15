@@ -27,7 +27,8 @@ class BrandStemResponse(collections.Sequence):
 
 class BrandStem(object):
 
-    HOST = ''
+    SCHEME = 'https'
+    HOST = 'brandstem.ca'
     DEFAULT_PAGE_SIZE = 100
 
     def __init__(self, access_id, access_secret):
@@ -51,7 +52,7 @@ class BrandStem(object):
         })
 
         session = Session()
-        url = 'http://{host}/api/v2{endpoint}'.format(host=self.HOST, endpoint=endpoint)
+        url = '{scheme}://{host}/api/v2{endpoint}'.format(scheme=self.SCHEME, host=self.HOST, endpoint=endpoint)
 
         request = Request('GET', url, params=params)
         request = request.prepare()
@@ -65,7 +66,6 @@ class BrandStem(object):
             'X-Brandstem-Signature': signature,
         })
 
-        # TODO: DQ remember to add cert and timeout
         response = session.send(request)
         return BrandStemResponse(response)
 
