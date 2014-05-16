@@ -1,7 +1,7 @@
 python-brandstem
 ================
 
-Brandstem API Client written in python.
+Brandstem API Client written for Python 2.7.
 
 To use this client you will need an Access ID and Access Secret provided by the BrandStem Team.
 
@@ -114,3 +114,16 @@ Full Example
 
     # show page two of the categories list, paginated at 50 objects per page
     category_list = connection.get_category_list(page=2, page_size=50)
+
+License
+-------
+
+Copyright 2014 St. Joseph Communications
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
