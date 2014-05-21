@@ -111,3 +111,7 @@ class BrandStem(object):
     def get_campaign_product_list(self, campaign_id, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/campaign/{}/products'.format(campaign_id)
         return self.get(endpoint, page, page_size)
+
+    def get_category_descendants_list(self, category_id, page=1, page_size=DEFAULT_PAGE_SIZE):
+        endpoint = '/category/{}/descendants'.format(category_id)
+        return self.get(endpoint, page, page_size)
