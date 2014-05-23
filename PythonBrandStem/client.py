@@ -84,6 +84,10 @@ class BrandStem(object):
         endpoint = '/category/{}/products'.format(category_id)
         return self.get(endpoint, page, page_size)
 
+    def get_category_product_list_all(self, category_id, page=1, page_size=DEFAULT_PAGE_SIZE):
+        endpoint = '/category/{}/products?type=all'.format(category_id)
+        return self.get(endpoint, page, page_size)
+
     def search_category(self, name, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/search/category'
         return self.get(endpoint, page, page_size, {'name': name})
