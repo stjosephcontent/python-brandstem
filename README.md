@@ -8,7 +8,7 @@ To use this client you will need an Access ID and Access Secret provided by the 
 Installing
 ----------
 
-    >pip install git+https://github.com/stjosephcontent/python-brandstem
+    >pip install git+ssh://git@github.com/stjosephcontent/python-brandstem
 
 
 Connecting
