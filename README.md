@@ -5,6 +5,12 @@ Brandstem API Client written for Python 2.7.
 
 To use this client you will need an Access ID and Access Secret provided by the BrandStem Team.
 
+Installing
+----------
+
+    >pip install git+https://github.com/stjosephcontent/python-brandstem
+
+
 Connecting
 ----------
 
@@ -82,7 +88,7 @@ List the Active Qualified Listed products in a campaign. endpoint: `/api/v2/camp
 Full Example
 ------------
 
-    from PythonBrandStem.client import BrandStem
+    from pythonbrandstem.client import BrandStem
 
     access_id = '<access_id>'
     access_secret = '<access_secret>'
