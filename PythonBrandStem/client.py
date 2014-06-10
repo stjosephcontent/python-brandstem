@@ -51,7 +51,6 @@ class BrandStem(object):
             'page_size': page_size,
         })
 
-        session = Session()
         url = '{scheme}://{host}/api/v2{endpoint}'.format(scheme=self.SCHEME, host=self.HOST, endpoint=endpoint)
 
         request = Request('GET', url, params=params)
@@ -66,6 +65,10 @@ class BrandStem(object):
             'X-Brandstem-Signature': signature,
         })
 
+        return request
+
+    def send(self, request):
+        session = Session()
         response = session.send(request)
         return BrandStemResponse(response)
 
@@ -74,48 +77,48 @@ class BrandStem(object):
             endpoint = '/category/{}/children'.format(category_id)
         else:
             endpoint = '/category'
-        return self.get(endpoint, page, page_size)
+        return self.send(self.get(endpoint, page, page_size))
 
     def get_category(self, category_id, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/category/{}'.format(category_id)
-        return self.get(endpoint, page, page_size)
+        return self.send(self.get(endpoint, page, page_size))
 
     def get_category_product_list(self, category_id, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/category/{}/products'.format(category_id)
-        return self.get(endpoint, page, page_size)
+        return self.send(self.get(endpoint, page, page_size))
 
     def get_category_product_list_all(self, category_id, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/category/{}/products?type=all'.format(category_id)
-        return self.get(endpoint, page, page_size)
+        return self.send(self.get(endpoint, page, page_size))
 
     def search_category(self, name, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/search/category'
-        return self.get(endpoint, page, page_size, {'name': name})
+        return self.send(self.get(endpoint, page, page_size, {'name': name}))
 
     def get_product(self, product_id, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/product/{}'.format(product_id)
-        return self.get(endpoint, page, page_size)
+        return self.send(self.get(endpoint, page, page_size))
 
     def search_product_by_name(self, name, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/search/product'
-        return self.get(endpoint, page, page_size, {'name': name})
+        return self.send(self.get(endpoint, page, page_size, {'name': name}))
 
     def search_product_by_gtin(self, gtin, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/search/product'
-        return self.get(endpoint, page, page_size, {'gtin': gtin})
+        return self.send(self.get(endpoint, page, page_size, {'gtin': gtin}))
 
     def get_campaign_list(self, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/campaign'
-        return self.get(endpoint, page, page_size)
+        return self.send(self.get(endpoint, page, page_size))
 
     def get_campaign(self, campaign_id, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/campaign/{}'.format(campaign_id)
-        return self.get(endpoint, page, page_size)
+        return self.send(self.get(endpoint, page, page_size))
 
     def get_campaign_product_list(self, campaign_id, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/campaign/{}/products'.format(campaign_id)
-        return self.get(endpoint, page, page_size)
+        return self.send(self.get(endpoint, page, page_size))
 
     def get_category_descendants_list(self, category_id, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/category/{}/descendants'.format(category_id)
-        return self.get(endpoint, page, page_size)
+        return self.send(self.get(endpoint, page, page_size))
