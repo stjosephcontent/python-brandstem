@@ -19,10 +19,16 @@ class BrandStemResponse(collections.Sequence):
         self.object_list = response.get('object_list')
 
     def __len__(self):
-        return len(self.object_list)
+        if self.object_list:
+            return len(self.object_list)
+        else:
+            return None
 
     def __getitem__(self, index):
-        return self.object_list[index]
+        if self.object_list:
+            return self.object_list[index]
+        else:
+            return None
 
 
 class BrandStem(object):
