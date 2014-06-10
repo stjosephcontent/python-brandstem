@@ -1,4 +1,7 @@
-from distutils.core import setup
+import os
+import sys
+
+from setuptools import setup
 
 setup(
     name="Python Brandstem",
