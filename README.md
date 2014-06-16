@@ -1,5 +1,5 @@
-python-brandstem
-================
+brain-api-test-suite
+====================
 
 Brandstem API Client written for Python 2.7.
 
