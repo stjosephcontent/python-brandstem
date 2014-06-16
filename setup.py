@@ -4,10 +4,10 @@ import sys
 from setuptools import setup
 
 setup(
-    name="Python Brandstem",
+    name="python brandstem",
     version="1.0",
-    packages=['pythonbrandstem'],
+    packages=['brandstem'],
     license="MIT",
-    requires=['requests(>=1.0,<3.0)'],
-    install_requires=['requests>=1.0,<3.0'],
+    requires=['requests(=2.2.1)'],
+    install_requires=['requests=2.2.1'],
 )
