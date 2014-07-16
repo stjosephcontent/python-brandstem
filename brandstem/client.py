@@ -128,3 +128,13 @@ class BrandStem(object):
     def get_category_descendants_list(self, category_id, page=1, page_size=DEFAULT_PAGE_SIZE):
         endpoint = '/category/{}/descendants'.format(category_id)
         return self.send(self.get(endpoint, page, page_size))
+
+    def get_flyer(self):
+        endpoint = '/flyer'
+        # flyers are not paginated
+        return self.send(self.get(endpoint, 1, 100))
+
+    def get_flyer_items(self, flyer_id):
+        endpoint = '/flyer/{}'.format(flyer_id)
+        # flyers are not paginated
+        return self.send(self.get(endpoint, 1, 100))
