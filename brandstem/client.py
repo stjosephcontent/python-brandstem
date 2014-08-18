@@ -138,3 +138,8 @@ class BrandStem(object):
         endpoint = '/flyer/{}'.format(flyer_id)
         # flyers are not paginated
         return self.send(self.get(endpoint, 1, 100))
+
+    def get_flyer_zones(self, flyer_id):
+        endpoint = '/flyer/{}/zones'.format(flyer_id)
+        # flyers are not paginated
+        return self.send(self.get(endpoint, 1, 100))
