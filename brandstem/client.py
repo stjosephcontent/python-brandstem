@@ -142,12 +142,12 @@ class BrandStem(object):
     def get_flyer_items_by_zone(self, flyer_id, flyer_zone):
         endpoint = '/flyer/{}'.format(flyer_id)
         # flyers are not paginated
-        return self.send(self.get(endpoint, 1, 100), {'flyer_zone': flyer_zone})
+        return self.send(self.get(endpoint, 1, 100, {'flyer_zone': flyer_zone}))
 
     def get_flyer_items_by_page(self, flyer_id, flyer_page):
         endpoint = '/flyer/{}'.format(flyer_id)
         # flyers are not paginated
-        return self.send(self.get(endpoint, 1, 100), {'flyer_page': flyer_page})
+        return self.send(self.get(endpoint, 1, 100, {'flyer_page': flyer_page}))
 
     def get_flyer_zones(self, flyer_id):
         endpoint = '/flyer/{}/zones'.format(flyer_id)
