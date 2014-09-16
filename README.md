@@ -1,5 +1,5 @@
-brain-api-test-suite
-====================
+python-brandstem
+================
 
 Brandstem API Client written for Python 2.7.
 
@@ -8,7 +8,7 @@ To use this client you will need an Access ID and Access Secret provided by the 
 Installing
 ----------
 
-    >pip install git+ssh://git@github.com/stjosephcontent/python-brandstem
+    > pip install git+ssh://git@github.com/stjosephcontent/python-brandstem
 
 
 Connecting
