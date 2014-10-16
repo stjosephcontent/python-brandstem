@@ -13,12 +13,13 @@ from requests.sessions import Session
 class BrandStemResponse(collections.Sequence):
 
     def __init__(self, response):
-        self.response = response.content
-        response = json.loads(response.content)
-        self.count = response.get('count')
-        self.page = response.get('page')
-        self.num_pages = response.get('num_pages')
-        self.object_list = response.get('object_list')
+        self.response = response.content.decode('utf-8')
+
+        response_obj = json.loads(self.response)
+        self.count = response_obj.get('count')
+        self.page = response_obj.get('page')
+        self.num_pages = response_obj.get('num_pages')
+        self.object_list = response_obj.get('object_list')
 
     def __len__(self):
         if self.object_list:
@@ -48,8 +49,9 @@ class BrandStem(object):
         return int(time.time())
 
     def compute_signature(self, path, unix_date):
-        key = str(unix_date) + self.access_secret
-        signature_computed = hmac.new(key=str(key), msg=path, digestmod=hashlib.sha256).hexdigest()
+        key = '{}{}'.format(str(unix_date), self.access_secret).encode('utf-8')
+        path = path.encode('utf-8')
+        signature_computed = hmac.new(key=key, msg=path, digestmod=hashlib.sha256).hexdigest()
         return signature_computed
 
     def get(self, endpoint, page, page_size, params=None):
