@@ -1,6 +1,17 @@
 python-brandstem
 ================
 
+<table>
+<tr>
+<th>Branch</th>
+<th>Build</th>
+</tr>
+<tr>
+<td>master</td>
+<td><a href="https://snap-ci.com/stjosephcontent/python-brandstem/branch/master"><img src="https://snap-ci.com/j-flodPCUj7cATrUd3Wd_4BTNAtiXuuy2SbUHIGThp8/build_image"></a></td>
+</tr>
+</table>
+
 Brandstem API Client written for Python 2.7.
 
 To use this client you will need an Access ID and Access Secret provided by the BrandStem Team.
